@@ -44,7 +44,7 @@
 using namespace std;
 
 // DEBUG Macro, to be disabled upon release
-#define DEBUG
+//#define DEBUG
 
 SenderX::SenderX(const char *fname, int d)
         : PeerX(d, fname), bytesRd(-1), blkNum(255) {
@@ -131,7 +131,7 @@ void SenderX::sendFile() {
             }
 
             // send data
-            if (-1 == myWrite(transferringFileD, &blkBuf, BLK_SZ_CRC))
+            if (-1 == myWrite(mediumD, &blkBuf, BLK_SZ_CRC))
                 ErrorPrinter("myWrite(transferringFileD, &blkBuf, BLK_SZ_CRC)", __FILE__, __LINE__, errno);
 
             // assume sent block will be ACK'd
@@ -150,11 +150,12 @@ void SenderX::sendFile() {
         //do
         {
             // Send <eot> using a parent function
-            sendByte((uint8_t)EOT);
 
+            sendByte((uint8_t)EOT);
+            sendByte((uint8_t)EOT);
             // Listen for ACK
-            if (-1 == (bytesRd = myRead(transferringFileD, &byte, 1)))
-                ErrorPrinter("myRead(transferringFileD, &byte, 1 )", __FILE__, __LINE__, errno);
+            //if (-1 == (bytesRd = myRead(transferringFileD, &byte, 1)))
+            //    ErrorPrinter("myRead(transferringFileD, &byte, 1 )", __FILE__, __LINE__, errno);
         }
         //while(byte != ACK); // byte is 0 at the time, loop forever
 
