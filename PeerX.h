@@ -20,7 +20,7 @@
 #define REST_BLK_SZ  (CHUNK_SZ + REST_BLK_OH)
 #define BLK_SZ  	 (SOH_OH + REST_BLK_SZ)
 
-#define CRC_OH  1			//Overhead for checksum
+#define CRC_OH  2			//Overhead for checksum
 #define REST_BLK_OH_CRC  (BLK_NUM_AND_COMP_OH + CRC_OH)	//Overhead in rest of block
 #define REST_BLK_SZ_CRC  (CHUNK_SZ + REST_BLK_OH_CRC)
 #define BLK_SZ_CRC  	 (SOH_OH + REST_BLK_SZ_CRC)

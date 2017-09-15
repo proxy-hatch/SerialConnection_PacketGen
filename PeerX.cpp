@@ -124,13 +124,12 @@ chksum8ns (uint8_t* xModChksum8, uint8_t* buf)
 {
 	 register int wcj;
 	 register uint8_t *cp;
-	 unsigned oldcrc=0;
 	 int sum=0;
 	 for (wcj=CHUNK_SZ,cp=buf; --wcj>=0; ) {
-		sum+=*buf;
+		sum+=*cp++;
 	 }
 	 while(sum>255)
-		 sum-=256;
+		 sum-=255;
 
 	 *xModChksum8 = sum;
 }
