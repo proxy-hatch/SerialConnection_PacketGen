@@ -4,15 +4,15 @@
 //% Student 1 #: 123456781
 //% Student 1 userid (email): stu1 (stu1@sfu.ca)
 //
-//% Student Name 2: student2
-//% Student 2 #: 123456782
-//% Student 2 userid (email): stu2 (stu2@sfu.ca)
+//% Student Name 2: Sheung Yau Chung
+//% Student 2 #: 301236546
+//% Student 2 userid (email): sychung (stu2@sfu.ca)
 //
 //% Below, edit to list any people who helped you with the code in this file,
 //%      or put 'None' if nobody helped (the two of) you.
 //
 // Helpers: _everybody helped us/me with the assignment (list names or put 'None')__
-//
+// All TAs
 // Also, list any resources beyond the course textbooks and the course pages on Piazza
 // that you used in making your submission.
 //
