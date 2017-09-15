@@ -1,8 +1,8 @@
 //============================================================================
 //
-//% Student Name 1: student1
-//% Student 1 #: 123456781
-//% Student 1 userid (email): stu1 (stu1@sfu.ca)
+//% Student Name 1: Shawn (Yu Xuan) Wang
+//% Student 1 #: 301227972
+//% Student 1 userid (email): yxwang (stu1@sfu.ca)
 //
 //% Student Name 2: Sheung Yau Chung
 //% Student 2 #: 301236546
@@ -12,11 +12,11 @@
 //%      or put 'None' if nobody helped (the two of) you.
 //
 // Helpers: _everybody helped us/me with the assignment (list names or put 'None')__
-// All TAs
+// All TAs and the collective effort of the entire class through course piazza forum (including Dr Scratchley)
 // Also, list any resources beyond the course textbooks and the course pages on Piazza
 // that you used in making your submission.
 //
-// Resources:  ___________
+// Resources:  ENSC 351 forum on piazza.com
 //
 //%% Instructions:
 //% * Put your name(s), student number(s), userid(s) in the above section.
