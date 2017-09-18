@@ -129,7 +129,7 @@ chksum8ns (uint8_t* xModChksum8, uint8_t* buf)
 		sum+=*cp++;
 	 }
 	 while(sum>255)
-		 sum-=255;
+		 sum-=256;
 
 	 *xModChksum8 = sum;
 }

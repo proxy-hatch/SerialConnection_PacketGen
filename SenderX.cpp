@@ -75,8 +75,20 @@ void SenderX::genBlk(blkT blkBuf) {
 
     // ********* and additional code must be written ***********
     blkBuf[0] = SOH;
-    blkBuf[SOH_OH] = (uint8_t) (blkNum + 1);        //SOH_OH=1
+    if(blkNum==3){
+        blkNum=0;
+    }
+    if(blkNum==2){
+        blkBuf[SOH_OH] = (uint8_t) (0);        //SOH_OH=1
+    }
+    else
+        blkBuf[SOH_OH] = (uint8_t) (blkNum+1);        //SOH_OH=1
+
+    //TODO: fix this part################
+    // ########Hint: just store the generated correct blkNum to a variable, and do the same as here, 255-correct value
     blkBuf[BLK_NUM_AND_COMP_OH] = 255 - blkNum;        //BLK_NUM_AND_COMP_OH=2
+    //##############################
+
     // pad the data string with CTRL_Z if its shorter than CHUNK_SZ
     if (bytesRd < CHUNK_SZ) {
         for (int i = bytesRd; i <= CHUNK_SZ; i++)
@@ -126,9 +138,7 @@ void SenderX::sendFile() {
             blkNum++; // 1st block about to be sent or previous block was ACK'd
 
             // ********* fill in some code here to send a block ***********
-            if (blkNum == 255) {
-                blkNum = 0;
-            }
+
 
             // send data
             if (-1 == myWrite(mediumD, &blkBuf, BLK_SZ_CRC))
