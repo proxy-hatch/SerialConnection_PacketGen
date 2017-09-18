@@ -74,19 +74,25 @@ void SenderX::genBlk(blkT blkBuf) {
     }
 
     // ********* and additional code must be written ***********
+    uint8_t blkNumComp = 0;
+
     blkBuf[0] = SOH;
-    if(blkNum==3){
+    if(blkNum==256){ // 3 == 256
         blkNum=0;
+        blkNumComp = blkNum;
     }
-    if(blkNum==2){
+    if(blkNum==255){ // 2 == 255
         blkBuf[SOH_OH] = (uint8_t) (0);        //SOH_OH=1
     }
     else
+    {
         blkBuf[SOH_OH] = (uint8_t) (blkNum+1);        //SOH_OH=1
+        blkNumComp=blkNum+1;
+    }
 
     //TODO: fix this part################
     // ########Hint: just store the generated correct blkNum to a variable, and do the same as here, 255-correct value
-    blkBuf[BLK_NUM_AND_COMP_OH] = 255 - blkNum;        //BLK_NUM_AND_COMP_OH=2
+    blkBuf[BLK_NUM_AND_COMP_OH] = 255 - blkNumComp;        //BLK_NUM_AND_COMP_OH=2
     //##############################
 
     // pad the data string with CTRL_Z if its shorter than CHUNK_SZ
