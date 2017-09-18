@@ -77,23 +77,22 @@ void SenderX::genBlk(blkT blkBuf) {
     uint8_t blkNumComp = 0;
 
     blkBuf[0] = SOH;
+    // past wrap around, reset
     if(blkNum==256){ // 3 == 256
         blkNum=0;
-        blkNumComp = blkNum;
     }
+    // Reached wrap around, do not modify blkNum
     if(blkNum==255){ // 2 == 255
-        blkBuf[SOH_OH] = (uint8_t) (0);        //SOH_OH=1
+        blkNumComp=0;
+        blkBuf[SOH_OH] = (uint8_t) (blkNumComp);        //SOH_OH=1
     }
-    else
+    else    // regular case
     {
-        blkBuf[SOH_OH] = (uint8_t) (blkNum+1);        //SOH_OH=1
         blkNumComp=blkNum+1;
+        blkBuf[SOH_OH] = (uint8_t) (blkNumComp);        //SOH_OH=1
     }
 
-    //TODO: fix this part################
-    // ########Hint: just store the generated correct blkNum to a variable, and do the same as here, 255-correct value
     blkBuf[BLK_NUM_AND_COMP_OH] = 255 - blkNumComp;        //BLK_NUM_AND_COMP_OH=2
-    //##############################
 
     // pad the data string with CTRL_Z if its shorter than CHUNK_SZ
     if (bytesRd < CHUNK_SZ) {
@@ -146,9 +145,14 @@ void SenderX::sendFile() {
             // ********* fill in some code here to send a block ***********
 
 
-            // send data
+            // send data (blk length dependant on Crcflg)
+            if(Crcflg){
             if (-1 == myWrite(mediumD, &blkBuf, BLK_SZ_CRC))
                 ErrorPrinter("myWrite(transferringFileD, &blkBuf, BLK_SZ_CRC)", __FILE__, __LINE__, errno);
+            } else{
+                if (-1 == myWrite(mediumD, &blkBuf, BLK_SZ))
+                    ErrorPrinter("myWrite(transferringFileD, &blkBuf, BLK_SZ_CRC)", __FILE__, __LINE__, errno);
+            }
 
             // assume sent block will be ACK'd
             genBlk(blkBuf); // prepare next block
